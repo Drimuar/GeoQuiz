@@ -1,6 +1,7 @@
 package com.bignerdranch.android.geoquiz
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -38,11 +39,21 @@ class MainActivity : AppCompatActivity() {
             checkAnswer(true)
             trueButton.isEnabled = false
             falseButton.isEnabled = false
+            if (quizViewModel.currentIndex + 1 == quizViewModel.questionBankSize) {
+                val ma2intent = Intent(this@MainActivity, MainActivity2::class.java)
+                ma2intent.putExtra("testNameData", quizViewModel.correctAnswer);
+                startActivity(ma2intent)
+            }
         }
         falseButton.setOnClickListener { view: View ->
             checkAnswer(false)
             trueButton.isEnabled = false
             falseButton.isEnabled = false
+            if (quizViewModel.currentIndex + 1 == quizViewModel.questionBankSize) {
+                val ma2intent = Intent(this@MainActivity, MainActivity2::class.java)
+                ma2intent.putExtra("testNameData", quizViewModel.correctAnswer);
+                startActivity(ma2intent)
+            }
         }
         nextButton.setOnClickListener {
             quizViewModel.moveToNext()
@@ -94,6 +105,7 @@ class MainActivity : AppCompatActivity() {
     private fun checkAnswer(userAnswer: Boolean) {
         val correctAnswer = quizViewModel.currentQuestionAnswer
         val messageResId = if (userAnswer == correctAnswer) {
+            quizViewModel.countCorrectAnswer()
             R.string.correct_toast
         }else{
             R.string.incorrect_toast

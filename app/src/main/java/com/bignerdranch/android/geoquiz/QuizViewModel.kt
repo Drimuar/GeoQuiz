@@ -8,6 +8,7 @@ private const val TAG = "QuizViewModel"
  
 class QuizViewModel: ViewModel() {
     var currentIndex = 0
+    var correctAnswer = 0
     private var questionBank = listOf(
         Question(R.string.question_australia, true),
         Question(R.string.question_oceans, true),
@@ -23,6 +24,9 @@ class QuizViewModel: ViewModel() {
     
     fun moveToNext() {
         currentIndex = (currentIndex + 1) % questionBank.size
+    }
+    fun countCorrectAnswer() {
+        correctAnswer += 1
     }
 
 }
