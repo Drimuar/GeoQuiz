@@ -16,6 +16,7 @@ class QuizViewModel: ViewModel() {
         Question(R.string.question_americas, true),
         Question(R.string.question_asia, true)
     )
+    var questionBankSize = questionBank.size
     val currentQuestionAnswer: Boolean get()  = questionBank[currentIndex].answer
     
     val currentQuestionText: Int get()  = questionBank[currentIndex].textResId

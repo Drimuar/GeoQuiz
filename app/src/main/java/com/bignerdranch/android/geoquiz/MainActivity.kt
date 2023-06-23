@@ -36,16 +36,26 @@ class MainActivity : AppCompatActivity() {
         questionTextView = findViewById(R.id.question_text_view)
         trueButton.setOnClickListener { view: View ->
             checkAnswer(true)
+            trueButton.isEnabled = false
+            falseButton.isEnabled = false
         }
         falseButton.setOnClickListener { view: View ->
             checkAnswer(false)
+            trueButton.isEnabled = false
+            falseButton.isEnabled = false
         }
         nextButton.setOnClickListener {
             quizViewModel.moveToNext()
             updateQuestion()
+            trueButton.isEnabled = true
+            falseButton.isEnabled = true
+            if (quizViewModel.currentIndex + 1 == quizViewModel.questionBankSize) {
+                nextButton.isEnabled = false
+            }
         }
         updateQuestion()
     }
+
 
     override fun onStart() {
                 super.onStart()
