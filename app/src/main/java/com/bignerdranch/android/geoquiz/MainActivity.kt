@@ -4,12 +4,10 @@ package com.bignerdranch.android.geoquiz
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 
 
@@ -35,23 +33,23 @@ class MainActivity : AppCompatActivity() {
         falseButton = findViewById(R.id.false_button)
         nextButton = findViewById(R.id.next_button)
         questionTextView = findViewById(R.id.question_text_view)
-        trueButton.setOnClickListener { view: View ->
+        trueButton.setOnClickListener {
             checkAnswer(true)
             trueButton.isEnabled = false
             falseButton.isEnabled = false
             if (quizViewModel.currentIndex + 1 == quizViewModel.questionBankSize) {
                 val ma2intent = Intent(this@MainActivity, MainActivity2::class.java)
-                ma2intent.putExtra("testNameData", quizViewModel.correctAnswer);
+                ma2intent.putExtra("testNameData", quizViewModel.correctAnswer)
                 startActivity(ma2intent)
             }
         }
-        falseButton.setOnClickListener { view: View ->
+        falseButton.setOnClickListener {
             checkAnswer(false)
             trueButton.isEnabled = false
             falseButton.isEnabled = false
             if (quizViewModel.currentIndex + 1 == quizViewModel.questionBankSize) {
                 val ma2intent = Intent(this@MainActivity, MainActivity2::class.java)
-                ma2intent.putExtra("testNameData", quizViewModel.correctAnswer);
+                ma2intent.putExtra("testNameData", quizViewModel.correctAnswer)
                 startActivity(ma2intent)
             }
         }
